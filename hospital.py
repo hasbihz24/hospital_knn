@@ -180,6 +180,70 @@ if submitted:
 
     res_col, prob_col = st.columns([3,2])
 
+# ==========================================
+# LEFT COLUMN: THE RESULT CARD
+# ==========================================
+with res_col:
+    # 1. Build the loop string in Python (too complex for pure HTML)
+    steps_html = ''.join(
+        f'<div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;">'
+        f'<span style="color:{info["color"]};font-size:14px;">📍</span>'
+        f'<span style="font-size:14px;color:#374151;">{step}</span></div>'
+        for step in info['next']
+    )
+    
+    # 2. Load the HTML shell
+    with open("result_card.html", "r", encoding="utf-8") as f:
+        result_template = f.read()
+        
+    # 3. Inject the variables and display
+    st.markdown(result_template.format(
+        bg=info['bg'],
+        border=info['border'],
+        icon=info['icon'],
+        color=info['color'],
+        dept_name=dept_name,
+        desc=info['desc'],
+        steps_html=steps_html
+    ), unsafe_allow_html=True)
+
+
+# ==========================================
+# RIGHT COLUMN: THE CONFIDENCE BARS
+# ==========================================
+with prob_col:
+    # 1. Build the loop string in Python
+    sorted_depts = sorted(dept_map_inv.items(), key=lambda x: proba[x[0]], reverse=True)
+    bars_html = ""
+    for idx, dname in sorted_depts:
+        pct    = proba[idx] * 100
+        dinfo  = DEPT_INFO[dname]
+        is_top = dname == dept_name
+        bars_html += f"""
+        <div style="margin-bottom:14px;">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:5px;">
+                <span style="font-size:13px;font-weight:{'700' if is_top else '400'};color:{'#111827' if is_top else '#6b7280'};">
+                    {dinfo['icon']} {dname}
+                </span>
+                <span style="font-size:13px;font-weight:{'700' if is_top else '400'};color:{dinfo['color'] if is_top else '#9ca3af'};">
+                    {pct:.1f}%
+                </span>
+            </div>
+            <div style="background:#f3f4f6;border-radius:6px;height:8px;overflow:hidden;">
+                <div style="background:{'linear-gradient(90deg,'+dinfo['color']+','+dinfo['border']+')' if is_top else '#e5e7eb'};
+                            height:100%;border-radius:6px;width:{pct}%;transition:width 0.5s ease;"></div>
+            </div>
+        </div>"""
+
+    # 2. Load the HTML shell
+    with open("confidence_card.html", "r", encoding="utf-8") as f:
+        confidence_template = f.read()
+
+    # 3. Inject the loop and display
+    st.markdown(confidence_template.format(
+        bars_html=bars_html
+    ), unsafe_allow_html=True)
+
    
 
 
