@@ -103,6 +103,21 @@ with st.form("triage_form"):
         duration = st.selectbox("Duration", options=list(dur_map.keys()), index=1)
     st.markdown("<br>", unsafe_allow_html=True)
 
+    with open ("severity.html", "r", encoding="utf-8") as f:
+        severity = f.read()
+    
+    st.markdown(severity, unsafe_allow_html= True)
+
+    col_temp, col_hr = st.columns(2)
+    with col_temp:
+        temprature_level = st.selectbox("Temprature", options=list(temp_map.keys()), index=1)
+    with col_hr:
+        heart_rate_level = st.selectbox("Heart Rate", options=list(hr_map.keys()), index=1)
+    
+    st.markdown("<br>", unsafe_allow_html=True)
+
+    
+
     
 
 
