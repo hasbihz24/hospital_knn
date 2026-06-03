@@ -148,7 +148,7 @@ if submitted:
         'gender' : gender_map.get(gender, 0),
         'fever' : int(fever),
         'cough' : int(cough),
-        'headcache' : int(headache),
+        'headache' : int(headache),
         'chest_pain' : int(chest_pain),
         'stomach_pain' : int(stomach_pain),
         'shortness_breath' : int(shortness_beath),
