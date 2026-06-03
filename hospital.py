@@ -185,12 +185,12 @@ if submitted:
 # ==========================================
     with res_col:
         # 1. Build the loop string in Python (too complex for pure HTML)
-        steps_html = f"""
-            <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;">
-                <span style="color:{info["color"]};font-size:14px;">📍</span>
-                <span style="font-size:14px;color:#374151;">{step}</span></div>
-                for step in info['next']
-        """
+        steps_html = ''.join(
+            f'<div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;">'
+            f'<span style="color:{info["color"]};font-size:14px;">📍</span>'
+            f'<span style="font-size:14px;color:#374151;">{step}</span></div>'
+            for step in info['next']
+        )
         
         # 2. Load the HTML shell
         with open("result.html", "r", encoding="utf-8") as f:
