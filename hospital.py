@@ -103,7 +103,7 @@ with st.form("triage_form"):
         duration = st.selectbox("Duration", options=list(dur_map.keys()), index=1)
     st.markdown("<br>", unsafe_allow_html=True)
 
-    with open ("severity.html", "r", encoding="utf-8") as f:
+    with open("severity.html", "r", encoding="utf-8") as f:
         severity = f.read()
     
     st.markdown(severity, unsafe_allow_html= True)
@@ -116,7 +116,7 @@ with st.form("triage_form"):
     
     st.markdown("<br>", unsafe_allow_html=True)
 
-    
+
 
     
 
