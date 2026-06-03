@@ -116,6 +116,31 @@ with st.form("triage_form"):
     
     st.markdown("<br>", unsafe_allow_html=True)
 
+    with open("history.html", "r", encoding="utf-8") as f:
+        history = f.read()
+    st.markdown(history, unsafe_allow_html=True)
+
+    ch1, ch2, ch3, _ = st.columns(4)
+    with ch1:
+        hypertension = st.checkbox("High Blood Pressure")
+    with ch2:
+        heart_disease = st.checkbox("Heart Disease")
+    with ch3:
+        asthma = st.checkbox("Asthama")
+    st.markdown("<br>", unsafe_allow_html=True)
+
+    with open("patient.html", "r", encoding="utf-8") as f:
+        patient = f.read()
+    
+    st.markdown(patient, unsafe_allow_html=True)
+    col_age, col_gen = st.columns(2)
+    with col_age:
+        age = st.number_input("Age", min_value=1, max_value=120, value=35)
+    with col_gen:
+        gender = st.selectbox("Gender", options=['Female', 'Male'])
+    
+    submitted = st.form_submit_button("Get AI Recommendation ->")
+
 
 
     
