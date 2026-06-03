@@ -193,7 +193,7 @@ if submitted:
         )
         
         # 2. Load the HTML shell
-        with open("result_card.html", "r", encoding="utf-8") as f:
+        with open("result.html", "r", encoding="utf-8") as f:
             result_template = f.read()
             
         # 3. Inject the variables and display
