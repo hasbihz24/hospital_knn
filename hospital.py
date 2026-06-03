@@ -220,20 +220,20 @@ if submitted:
             dinfo  = DEPT_INFO[dname]
             is_top = dname == dept_name
             bars_html = f"""
-            <div style="margin-bottom:14px;">
-                <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:5px;">
-                    <span style="font-size:13px;font-weight:{'700' if is_top else '400'};color:{'#111827' if is_top else '#6b7280'};">
-                        {dinfo['icon']} {dname}
-                    </span>
-                    <span style="font-size:13px;font-weight:{'700' if is_top else '400'};color:{dinfo['color'] if is_top else '#9ca3af'};">
-                        {pct:.1f}%
-                    </span>
-                </div>
-                <div style="background:#f3f4f6;border-radius:6px;height:8px;overflow:hidden;">
-                    <div style="background:{'linear-gradient(90deg,'+dinfo['color']+','+dinfo['border']+')' if is_top else '#e5e7eb'};
+<div style="margin-bottom:14px;">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:5px;">
+        <span style="font-size:13px;font-weight:{'700' if is_top else '400'};color:{'#111827' if is_top else '#6b7280'};">
+            {dinfo['icon']} {dname}
+        </span>
+        <span style="font-size:13px;font-weight:{'700' if is_top else '400'};color:{dinfo['color'] if is_top else '#9ca3af'};">
+            {pct:.1f}%
+        </span>
+        </div>
+            <div style="background:#f3f4f6;border-radius:6px;height:8px;overflow:hidden;">
+                <div style="background:{'linear-gradient(90deg,'+dinfo['color']+','+dinfo['border']+')' if is_top else '#e5e7eb'};
                                 height:100%;border-radius:6px;width:{pct}%;transition:width 0.5s ease;"></div>
-                </div>
-            </div>"""
+            </div>
+</div>"""
 
         # 2. Load the HTML shell
         with open("confidence_card.html", "r", encoding="utf-8") as f:
