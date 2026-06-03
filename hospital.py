@@ -16,6 +16,18 @@ def load_model():
     with open('hospital_model.pkl','rb') as f:
         return pickle.load(f)
 
+bundle        = load_model()
+model         = bundle['model']
+scaler        = bundle['scaler']
+features      = bundle['features']
+cols_to_scale = bundle['cols_to_scale']
+dept_map_inv  = bundle['dept_map_inv']
+gender_map    = bundle['gender_map']
+temp_map      = bundle['temp_map']
+hr_map        = bundle['hr_map']
+dur_map       = bundle['dur_map']
+cc_map        = bundle['cc_map']
+
 DEPT_INFO = {
     'Respiratory Medicine': {
         'icon':'🫁','color':'#0284c7','bg':'#e0f2fe','border':'#7dd3fc',
@@ -73,12 +85,25 @@ with st.form("triage_form"):
     with c4:
         nausea_vomiting = st.checkbox("Nausea / Vomiting")
         dizziness = st.checkbox("Diziness")
-    
+
     c5, _, _, _ = st.columns(4)
     with c5:
         skin_rash = st.checkbox("Skin Rash")
 
     st.markdown("<br>", unsafe_allow_html = True)
+
+    with open("duration_complaint.html", "r", encoding="utf-8") as f:
+        duration_complaint = f.read()
+    st.markdown(duration_complaint, unsafe_allow_html = True)
+
+    col_cc, col_dur = st.columns(2)
+    with col_cc:
+        chief_complaint = st.selectbox("Chief complaint", options=list(cc_map.keys()))
+    with col_dur:
+        duration = st.selectbox("Duration", options=list(dur_map.keys()), index=1)
+    st.markdown("<br>", unsafe_allow_html=True)
+
     
+
 
 
